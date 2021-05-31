@@ -87,13 +87,14 @@ public class MovieServiceImplement implements MovieService {
     public void listAllMovies() throws SQLException {
         try {
             connection = Provider.getConnection();
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM movie LEFT JOIN movie_genre_relation ON movie.id = movie_genre_relation.movie_id LEFT JOIN genre ON genre.id = movie_genre_relation.genre_id");
+            ResultSet resultSet = connection.createStatement().executeQuery("SELECT movie.id, movie.\"name\",movie.rating, movie.budget, genre.\"name\" AS genre_name  FROM movie LEFT JOIN movie_genre_relation ON movie.id = movie_genre_relation.movie_id LEFT JOIN genre ON genre.id = movie_genre_relation.genre_id");
             while (resultSet.next()) {
-                System.out.println("Id: " + resultSet.getInt("movie.id"));
-                System.out.println("Name: " + resultSet.getString("movie.name"));
-                System.out.println("Rating: " + resultSet.getDouble("movie.rating"));
-                System.out.println("Budget: " + resultSet.getDouble("movie.budget"));
-                System.out.println("Genre: " + resultSet.getString("genre.name"));
+                System.out.println("Id: " + resultSet.getInt("id"));
+                System.out.println("Name: " + resultSet.getString("name"));
+                System.out.println("Rating: " + resultSet.getDouble("rating"));
+                System.out.println("Budget: " + resultSet.getDouble("budget"));
+                System.out.println("Genre: " + resultSet.getString("genre_name"));
+                System.out.println("---------------------------------------------------------------------");
             }
             System.out.println("\n");
         } catch (Exception e) {
