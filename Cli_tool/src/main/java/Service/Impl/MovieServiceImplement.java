@@ -107,7 +107,7 @@ public class MovieServiceImplement implements MovieService {
     public void updateMovie() throws SQLException {
         connection = Provider.getConnection();
         String forUpdate, id;
-        System.out.print("Which genre you would like to UPDATE: ");
+        System.out.print("Which movie you would like to UPDATE: ");
         id = scanner.nextLine();
         System.out.print("What do you want to update from the list below:\n " +
                 "1 -> name\n" +
