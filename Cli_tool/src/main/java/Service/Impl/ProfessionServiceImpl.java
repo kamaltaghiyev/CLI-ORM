@@ -40,6 +40,7 @@ public class ProfessionServiceImpl implements ProfessionService {
             while (resultSet.next()) {
                 System.out.println("Id: " + resultSet.getInt("id"));
                 System.out.println("Profession: " + resultSet.getString("name"));
+                System.out.println("--------------------------------------------------------------");
             }
             System.out.println("\n");
         } catch (Exception e){
