@@ -48,7 +48,7 @@ public class GuiServiceImpl implements GuiService {
         GenreServiceImpl genreService = new GenreServiceImpl();
         String scannedGenreChoice = "";
         while (!scannedGenreChoice.equals("5")) {
-            System.out.println("Enter which operation you would like to do with movie table:\n" +
+            System.out.println("Enter which operation you would like to do with genre table:\n" +
                     "1 -> List all genres\n" +
                     "2 -> Add new genre\n" +
                     "3 -> Update genre\n" +
@@ -80,12 +80,12 @@ public class GuiServiceImpl implements GuiService {
         PersonServiceImpl personService = new PersonServiceImpl();
         String scannedPersonChoice = "";
         while (!scannedPersonChoice.equals("5")) {
-            System.out.println("Enter which operation you would like to do with movie table:\n" +
-                    "1 -> List all profession\n" +
-                    "2 -> Add new profession\n" +
-                    "3 -> Update profession\n" +
-                    "4 -> Remove profession\n" +
-                    "5 -> To get back");
+            System.out.println("Enter which operation you would like to do with person table:\n" +
+                    "1 -> List all person\n" +
+                    "2 -> Add new person\n" +
+                    "3 -> Update person\n" +
+                    "4 -> Remove person\n" +
+                    "5 -> To get person");
             scannedPersonChoice = choice.nextLine();
             switch (scannedPersonChoice) {
                 case "1":
@@ -112,7 +112,7 @@ public class GuiServiceImpl implements GuiService {
         ProfessionServiceImpl professionService = new ProfessionServiceImpl();
         String scannedProfessionChoice = "";
         while (!scannedProfessionChoice.equals("5")) {
-            System.out.println("Enter which operation you would like to do with movie table:\n" +
+            System.out.println("Enter which operation you would like to do with profession table:\n" +
                     "1 -> List all profession\n" +
                     "2 -> Add new profession\n" +
                     "3 -> Update profession\n" +
