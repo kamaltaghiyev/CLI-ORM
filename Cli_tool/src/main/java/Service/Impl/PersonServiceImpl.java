@@ -4,13 +4,9 @@ import DBUtils.Provider;
 import Models.Person;
 import Service.Services.PersonService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
 public class PersonServiceImpl implements PersonService {
@@ -27,15 +23,16 @@ public class PersonServiceImpl implements PersonService {
             if (surname.matches("([a-zA-Z]+)")) {
                 System.out.println("Enter birthday(dd.MM.yyyy)");
                 String scannedBirthday = scanner.nextLine();
-                if (scannedBirthday.matches("(^[0-9]{2}.[0-9]{2}.[0-9]{4}$])")) {
-                    Date birthday = new SimpleDateFormat("dd.MM.yyyy").parse(scannedBirthday);
+                if (scannedBirthday.matches("[0-9]{2}.[0-9]{2}.[0-9]{4}")) {
+                    java.util.Date birthday =  new SimpleDateFormat("dd.MM.yyyy").parse(scannedBirthday);
                     Person person = new Person(name, surname, birthday);
                     try {
                         connection = Provider.getConnection();
                         preparedStatement = connection.prepareStatement("insert into person(name,surname,birthday) values (?,?,?)");
                         preparedStatement.setString(1, person.getName());
                         preparedStatement.setString(2, person.getSurname());
-                        preparedStatement.setDate(3, (java.sql.Date) person.getBirthdate());
+                        java.sql.Date sqlDate = new java.sql.Date(person.getBirthdate().getTime());
+                        preparedStatement.setDate(3, sqlDate);
                         preparedStatement.executeUpdate();
                     } catch (Exception e) {
                         System.out.println(e);
@@ -52,7 +49,7 @@ public class PersonServiceImpl implements PersonService {
                         rs.next();
                         int id = rs.getInt("id");
                         rs.close();
-                        preparedStatement = connection.prepareStatement("insert into person_detailes(person_id,profession_id) values (?,?)");
+                        preparedStatement = connection.prepareStatement("insert into person_detalies(person_id,profession_id) values (?,?)");
                         preparedStatement.setInt(1, id);
                         int professionId = Integer.parseInt(scannedId);
                         preparedStatement.setInt(2,professionId);
@@ -71,13 +68,14 @@ public class PersonServiceImpl implements PersonService {
     public void selectAllPeople() throws SQLException {
         try {
             connection = Provider.getConnection();
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM person LEFT JOIN person_detalies ON person.id = person_detalies.person_id LEFT JOIN profession ON profession.id = person_detalies.profession_id");
+            ResultSet resultSet = connection.createStatement().executeQuery("SELECT person.\"id\", person.\"name\", person.surname, person.birthday,profession.\"name\" AS profession FROM person LEFT JOIN person_detalies ON person.id = person_detalies.person_id LEFT JOIN profession ON profession.id = person_detalies.profession_id");
             while (resultSet.next()) {
-                System.out.println("Id: " + resultSet.getInt("person.id"));
-                System.out.println("Name: " + resultSet.getString("person.name"));
-                System.out.println("Surname: " + resultSet.getString("person.surname"));
-                System.out.println("Birthday: " + resultSet.getDate("person.birthday"));
-                System.out.println("Profession: " + resultSet.getString("profession.name"));
+                System.out.println("Id: " + resultSet.getInt("id"));
+                System.out.println("Name: " + resultSet.getString("name"));
+                System.out.println("Surname: " + resultSet.getString("surname"));
+                System.out.println("Birthday: " + resultSet.getDate("birthday"));
+                System.out.println("Profession: " + resultSet.getString("name"));
+                System.out.println("----------------------------------------------------------------------------------------");
             }
             System.out.println("\n");
         } catch (Exception e){
