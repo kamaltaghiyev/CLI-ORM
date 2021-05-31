@@ -32,7 +32,11 @@ public class GuiServiceImpl implements GuiService {
                     movieService.addMovie();
                     break;
                 case "3":
-
+                    movieService.updateMovie();
+                    break;
+                case "4":
+                    movieService.removeMovie();
+                    break;
                 case "5":
                     System.out.println("Returning back");
                     break;
