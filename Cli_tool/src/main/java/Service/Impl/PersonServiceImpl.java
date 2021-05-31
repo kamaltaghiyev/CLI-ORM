@@ -87,11 +87,11 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void updatePerson() throws SQLException {
-
+        System.out.println("Unavailable");
     }
 
     @Override
     public void removePerson() throws SQLException {
-
+        System.out.println("Unavailable");
     }
 }
