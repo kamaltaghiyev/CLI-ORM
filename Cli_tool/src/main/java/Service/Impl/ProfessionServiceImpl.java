@@ -56,7 +56,7 @@ public class ProfessionServiceImpl implements ProfessionService {
             connection = Provider.getConnection();
             preparedStatement = connection.prepareStatement("UPDATE profession SET name = ? WHERE id = ?");
             String forUpdate, id;
-            System.out.print("Which genre you would like to UPDATE: ");
+            System.out.print("Which profession you would like to UPDATE: ");
             id = scannerName.nextLine();
             System.out.print("Would you like to update 'name' field [Y/N]: ");
             forUpdate = scannerName.nextLine();
