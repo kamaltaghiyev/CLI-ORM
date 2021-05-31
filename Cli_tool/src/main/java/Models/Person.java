@@ -1,7 +1,8 @@
 package Models;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
+
 
 @Entity
 @Table(name = "person")
@@ -21,8 +22,7 @@ public class Person {
         this.birthdate = null;
     }
 
-    public Person(int id, String name, String surname, Date birthdate) {
-        this.id = id;
+    public Person( String name, String surname, Date birthdate) {
         this.name = name;
         this.surname = surname;
         this.birthdate = birthdate;

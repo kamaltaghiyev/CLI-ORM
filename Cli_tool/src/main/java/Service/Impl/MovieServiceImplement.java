@@ -25,7 +25,7 @@ public class MovieServiceImplement implements MovieService {
 
             System.out.println("Enter rating\n");
             String scannedRating = scanner.nextLine();
-            if (scannedRating.matches("([0-5].*[0-9]*)")){
+            if (scannedRating.matches("([0-5].?[0-9]*)")){
                 double rating = Double.parseDouble(scannedRating);
 
                 System.out.println("Enter budget\n");
@@ -89,7 +89,7 @@ public class MovieServiceImplement implements MovieService {
                 System.out.println("Name: " + resultSet.getString("movie.name"));
                 System.out.println("Rating: " + resultSet.getDouble("movie.rating"));
                 System.out.println("Budget: " + resultSet.getDouble("movie.budget"));
-                System.out.println("Genre: " + resultSet.getDouble("genre.name"));
+                System.out.println("Genre: " + resultSet.getString("genre.name"));
             }
             System.out.println("\n");
         } catch (Exception e){

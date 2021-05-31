@@ -6,6 +6,7 @@ import Service.Services.GuiService;
 import exceptions.RatingOutOfBoundException;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class GuiServiceImpl implements GuiService {
@@ -71,8 +72,36 @@ public class GuiServiceImpl implements GuiService {
         }
     }
 
-    public void personOperations() {
+    public void personOperations() throws SQLException, ParseException {
+        PersonServiceImpl personService = new PersonServiceImpl();
+        String scannedPersonChoice = "";
+        while (!scannedPersonChoice.equals("5")) {
+            System.out.println("Enter which operation you would like to do with movie table:\n" +
+                    "1 -> List all profession\n" +
+                    "2 -> Add new profession\n" +
+                    "3 -> Update profession\n" +
+                    "4 -> Remove profession\n" +
+                    "5 -> To get back");
+            scannedPersonChoice = choice.nextLine();
+            switch (scannedPersonChoice) {
+                case "1":
+                    personService.selectAllPeople();
+                    break;
+                case "2":
+                    personService.addPerson();
+                    break;
+                case "3":
+                    personService.updatePerson();
+                    break;
+                case "4":
+                    personService.removePerson();
+                    break;
+                case "5":
+                    System.out.println("Returning back");
+                    break;
+            }
 
+        }
     }
 
     public void professionOperations() throws SQLException {
@@ -107,7 +136,7 @@ public class GuiServiceImpl implements GuiService {
         }
     }
 
-    public void gui() throws SQLException, RatingOutOfBoundException {
+    public void gui() throws SQLException, RatingOutOfBoundException, ParseException {
         String scannedChoice = "";
         System.out.println("Hello! You entered to CLI tool\n");
         while (!scannedChoice.equals("5")) {
